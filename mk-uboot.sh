@@ -86,11 +86,11 @@ EOF
 elif [ "${CHIP}" == "rk3399" ]; then
 	$TOOLPATH/loaderimage --pack --uboot ./u-boot-dtb.bin uboot.img 0x200000 --size 1024 1
 
-	tools/mkimage -n rk3399 -T rksd -d ../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.20.bin idbloader.img
+	tools/mkimage -n rk3399 -T rksd -d ../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.22.bin idbloader.img
 	cat ../rkbin/bin/rk33/rk3399_miniloader_v1.19.bin >> idbloader.img
 	cp idbloader.img ${OUT}/u-boot/
 
-	tools/mkimage -n rk3399 -T rkspi -d ../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.20.bin idbloader-spi.img
+	tools/mkimage -n rk3399 -T rkspi -d ../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.22.bin idbloader-spi.img
 	cat ../rkbin/bin/rk33/rk3399_miniloader_spinor_v1.14.bin >> idbloader-spi.img
 	cp idbloader-spi.img ${OUT}/u-boot/spi
 
@@ -105,7 +105,7 @@ MINOR=0
 SEC=0
 [BL31_OPTION]
 SEC=1
-PATH=../rkbin/bin/rk33/rk3399_bl31_v1.26.elf
+PATH=../rkbin/bin/rk33/rk3399_bl31_v1.28.elf
 ADDR=0x10000
 [BL32_OPTION]
 SEC=0
@@ -129,7 +129,7 @@ FILL_BYTE=0
 Name=IDBlock
 Flag=0
 Type=2
-File=../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.20.bin,../rkbin/bin/rk33/rk3399_miniloader_spinor_v1.14.bin
+File=../rkbin/bin/rk33/rk3399_ddr_800MHz_v1.22.bin,../rkbin/bin/rk33/rk3399_miniloader_spinor_v1.14.bin
 PartOffset=0x40
 PartSize=0x7C0
 [UserPart2]
@@ -155,11 +155,11 @@ EOF
 elif [ "${CHIP}" == "rk3399pro" ]; then
 	$TOOLPATH/loaderimage --pack --uboot ./u-boot-dtb.bin uboot.img 0x200000 --size 1024 1
 
-	tools/mkimage -n rk3399pro -T rksd -d ../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.20.bin idbloader.img
+	tools/mkimage -n rk3399pro -T rksd -d ../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.22.bin idbloader.img
 	cat ../rkbin/bin/rk33/rk3399pro_miniloader_v1.15.bin >> idbloader.img
 	cp idbloader.img ${OUT}/u-boot/
 
-	tools/mkimage -n rk3399pro -T rkspi -d ../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.20.bin idbloader-spi.img
+	tools/mkimage -n rk3399pro -T rkspi -d ../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.22.bin idbloader-spi.img
 	cat ../rkbin/bin/rk33/rk3399_miniloader_spinor_v1.14.bin >> idbloader-spi.img
 	cp idbloader-spi.img ${OUT}/u-boot/spi
 
@@ -175,7 +175,7 @@ MINOR=0
 SEC=0
 [BL31_OPTION]
 SEC=1
-PATH=../rkbin/bin/rk33/rk3399pro_bl31_v1.22.elf
+PATH=../rkbin/bin/rk33/rk3399pro_bl31_v1.28.elf
 ADDR=0x10000
 [BL32_OPTION]
 SEC=0
@@ -199,7 +199,7 @@ FILL_BYTE=0
 Name=IDBlock
 Flag=0
 Type=2
-File=../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.20.bin,../rkbin/bin/rk33/rk3399pro_miniloader_v1.15.bin
+File=../rkbin/bin/rk33/rk3399pro_ddr_800MHz_v1.22.bin,../rkbin/bin/rk33/rk3399pro_miniloader_v1.15.bin
 PartOffset=0x40
 PartSize=0x7C0
 [UserPart2]
@@ -223,13 +223,13 @@ EOF
 elif [ "${CHIP}" == "rk3128" ]; then
 	$TOOLPATH/loaderimage --pack --uboot ./u-boot-dtb.bin uboot.img
 
-	dd if=../rkbin/rk31/rk3128_ddr_300MHz_v2.06.bin of=DDRTEMP bs=4 skip=1
+	dd if=../rkbin/rk31/rk3128_ddr_300MHz_v2.08.bin of=DDRTEMP bs=4 skip=1
 	tools/mkimage -n rk3128 -T rksd -d DDRTEMP idbloader.img
-	cat ../rkbin/rk31/rk312x_miniloader_v2.40.bin >> idbloader.img
+	cat ../rkbin/rk31/rk312x_miniloader_v2.56.bin >> idbloader.img
 	cp idbloader.img ${OUT}/u-boot/
 	cp ../rkbin/rk31/rk3128_loader_v2.05.240.bin ${OUT}/u-boot/
 
-	$TOOLPATH/loaderimage --pack --trustos ../rkbin/rk31/rk3126_tee_ta_v1.27.bin trust.img
+	$TOOLPATH/loaderimage --pack --trustos ../rkbin/rk31/rk3126_tee_ta_v1.39.bin trust.img
 
 	cp uboot.img ${OUT}/u-boot/
 	mv trust.img ${OUT}/u-boot/
@@ -237,7 +237,7 @@ elif [ "${CHIP}" == "rk3308" ]; then
 	$TOOLPATH/loaderimage --pack --uboot ./u-boot-dtb.bin uboot.img 0x600000 --size 1024 1
 
 	tools/mkimage -n rk3308 -T rksd -d ../rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin idbloader.img
-	cat ../rkbin/bin/rk33/rk3308_miniloader_v1.13.bin >> idbloader.img
+	cat ../rkbin/bin/rk33/rk3308_miniloader_v1.14.bin >> idbloader.img
 	cp idbloader.img ${OUT}/u-boot/
 
 	#cp ../rkbin/bin/rk33/rk3308_loader_589MHz_uart2_m0_v1.26.111.bin ${OUT}/u-boot/
@@ -250,7 +250,7 @@ MINOR=0
 SEC=0
 [BL31_OPTION]
 SEC=1
-PATH=../rkbin/bin/rk33/rk3308_bl31_v2.10.elf
+PATH=../rkbin/bin/rk33/rk3308_bl31_v2.21.elf
 ADDR=0x00010000
 [BL32_OPTION]
 SEC=0
@@ -274,7 +274,7 @@ FILL_BYTE=0
 Name=IDBlock
 Flag=0
 Type=2
-File=../rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin,../rkbin/bin/rk33/rk3308_miniloader_v1.13.bin
+File=../rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin,../rkbin/bin/rk33/rk3308_miniloader_v1.14.bin
 PartOffset=0x40
 PartSize=0x7C0
 [UserPart2]
